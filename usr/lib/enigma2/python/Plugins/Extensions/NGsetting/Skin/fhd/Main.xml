@@ -1,0 +1,47 @@
+<screen name="NGsettingE2" title="Main Menu" position="center,center" size="1920,1080" backgroundColor="#ff000000" flags="wfNoBorder">
+	<!-- Header -->
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/background.jpg" position="0,0" size="1920,1080" scale="stretch" zPosition="-2" />
+	<ePixmap position="30,103" size="1840,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/sep2.png" zPosition="3" />
+
+	<!-- Clock -->
+	<widget source="global.CurrentTime" render="Label" position="1470,20" size="400,80" font="Regular;34" halign="right" valign="center" foregroundColor="#808080" backgroundColor="#101010" transparent="1" zPosition="1">
+		<convert type="ClockToText">Format %A %d %B %H:%M:%S</convert>
+	</widget>
+	<!-- PIG CHANNEL -->
+	<eLabel position="50,555" size="720,423" backgroundColor="#1b3c85" />
+	<eLabel position="55,560" size="710,413" backgroundColor="#20000000" />
+	<eLabel position="65,570" size="690,393" backgroundColor="#FFFFFFFF" />
+	<widget source="session.VideoPicture" render="Pig" position="72,580" size="680,383" backgroundColor="#AA001842" transparent="1" zPosition="2" />
+	<!-- Buttons Colors -->
+ 	<ePixmap position="30,990" size="1840,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/sep2.png" zPosition="3" />
+    <ePixmap position="59,0" size="106,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/logo.png" zPosition="5" alphatest="blend" scale="stretch" />
+    <ePixmap position="220,0" size="766,100" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/autosetting.png" zPosition="2" scale="stretch" alphatest="blend" />
+    <widget name="text" position="58,126" size="695,425" font="Regular;32" halign="left" foregroundColor="#808080" backgroundColor="#10202020" transparent="1" zPosition="1" />
+    <widget name="A" position="58,125" size="695,425" scrollbarMode="showNever" enableWrapAround="1" transparent="1" zPosition="5" foregroundColor="#707070" foregroundColorSelected="#ffffff" backgroundColor="#272e43" backgroundColorSelected="#272e43" />
+    <widget name="B" position="785,125" size="1085,600" scrollbarMode="showNever" enableWrapAround="1" transparent="1" zPosition="5" foregroundColor="#5dafff" foregroundColorSelected="#ffffff" backgroundColor="#303030" backgroundColorSelected="#002f72" />
+
+	<!-- Setting Installed Text / Update -->
+	<widget name="Key_Green" position="790,818" size="379,60" font="Regular;32" halign="right" foregroundColor="#808080" backgroundColor="#101010" transparent="1" zPosition="3" />
+	<widget name="namesat" position="1173,818" size="693,60" font="Regular;32" halign="left" foregroundColor="#ffffff" backgroundColor="#101010" transparent="1" zPosition="3" />
+	<widget name="dataDow" position="792,908" size="1067,60" font="Regular; 32" halign="center" foregroundColor="#808080" backgroundColor="#101010" transparent="1" zPosition="3" />
+
+	<!-- Lcn Green Button -->
+	<widget name="Green" position="412,1010" size="10,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/greenpanel.png" zPosition="2" alphatest="blend" />
+	<widget name="Key_Lcn" position="434,1010" size="300,40" font="Regular;32" halign="left" foregroundColor="#808080" backgroundColor="#101010" zPosition="3" transparent="1" />
+
+	<!-- Personal Yellow Button -->
+	<widget name="Yellow" position="789,1010" size="10,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/yellowpanel.png" zPosition="2" alphatest="blend" />
+	<widget name="Key_Personal" position="809,1010" size="300,40" font="Regular;32" halign="left" foregroundColor="#808080" backgroundColor="#101010" zPosition="3" transparent="1" />
+
+	<!-- AutoUpdate Blue Button -->
+	<widget name="Blue" position="1152,1010" size="10,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/bluepanel.png" zPosition="2" alphatest="blend" />
+	<widget name="autotimer" position="1167,1010" size="300,40" font="Regular;32" halign="left" foregroundColor="#808080" backgroundColor="#101010" zPosition="3" transparent="1" />
+
+	<!-- Exit Button -->
+    <ePixmap position="50,1010" size="10,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/redpanel.png" zPosition="2" alphatest="blend" />
+	<widget name="Key_Red" position="75,1010" size="300,40" font="Regular;32" halign="left" foregroundColor="#808080" backgroundColor="#101010" transparent="3" zPosition="1" />
+
+    <!-- Ok Button -->
+    <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/key_ok.png" position="1810,1005" size="50,50" scale="stretch" alphatest="blend" />
+
+</screen>

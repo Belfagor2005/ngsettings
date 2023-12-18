@@ -1,0 +1,170 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2023-12-10 21:16+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Moduli/Select.py:147 plugin.py:121
+msgid "Exit"
+msgstr "Esci"
+
+#: Moduli/Select.py:148 plugin.py:122
+msgid "Setting Installed:"
+msgstr "Setting installati:"
+
+#: Moduli/Select.py:173 plugin.py:248
+msgid "Last Update: Unregistered"
+msgstr "Ultimo aggiornamento: non registrato"
+
+#: Moduli/Select.py:175 plugin.py:250
+msgid "Last Update: "
+msgstr "Ultimo aggiornamento: "
+
+#: plugin.py:118
+msgid "Lcn"
+msgstr ""
+
+#: plugin.py:194
+msgid "Favourites: Yes"
+msgstr "Preferiti: Si'"
+
+#: plugin.py:198 plugin.py:205
+msgid "Favourites: No"
+msgstr "Preferiti: No"
+
+#: plugin.py:215
+msgid "Sorting Lcn Completed"
+msgstr "Ordinamento Lcn Completato"
+
+#: plugin.py:224
+msgid "AutoUpdate: Yes"
+msgstr ""
+
+#: plugin.py:228
+msgid "AutoUpdate: No"
+msgstr ""
+
+#: plugin.py:252
+msgid "Favourites: "
+msgstr "Preferiti: "
+
+#: plugin.py:253
+msgid "AutoUpdate: "
+msgstr ""
+
+#: plugin.py:297
+msgid "Coder: m43c0 & ftp21"
+msgstr ""
+
+#: plugin.py:298
+msgid "Skinner: mmark"
+msgstr ""
+
+#: plugin.py:299
+msgid "Vhannibal Official Plugin"
+msgstr ""
+
+#: plugin.py:300
+msgid "www.vhannibal.net"
+msgstr ""
+
+#: plugin.py:307
+msgid "Server down for maintenance"
+msgstr "Il server non e' attualmente disponibile"
+
+#: plugin.py:337
+#, python-format
+msgid ""
+"The new configurations are saved\n"
+"Setting: %s\n"
+"Date: %s\n"
+"The choice is different from the previous\n"
+"Do you want to proceed with the manual upgrade?"
+msgstr ""
+"La nuova configurazione e' stata salvata\n"
+"Setting: %s\n"
+"Data: %s\n"
+"La scelta e' diversa da quella precedente\n"
+"Vuoi procedere con l'aggiornamento manuale?"
+
+#: plugin.py:339
+#, python-format
+msgid ""
+"The new configurations are saved\n"
+"Setting: %s\n"
+"Date: %s \n"
+" The new setting has a more recent date\n"
+"Do you want to proceed with the manual upgrade?"
+msgstr ""
+"La nuova configurazione e' stata salvata\n"
+"Setting: %s\n"
+"Data: %s\n"
+"I nuovi setting hanno una data piu' recente\n"
+"Vuoi procedere con l'aggiornamento manuale?"
+
+#: plugin.py:341
+msgid "Setting already updated, you want to upgrade anyway?"
+msgstr "I setting sono gia' aggiornati, vuoi aggiornarli comunque?"
+
+#: plugin.py:518
+msgid "New Setting Vhannibal "
+msgstr "I nuovi setting Vhannibal "
+
+#: plugin.py:518
+msgid " of "
+msgstr " del "
+
+#: plugin.py:518
+msgid " updated"
+msgstr " sono stati installati"
+
+#: plugin.py:521
+msgid ""
+"Sorry!\n"
+"Error Download Setting"
+msgstr ""
+"Oops!\n"
+"Si e' verificato un errore"
+
+#~ msgid ""
+#~ "Maintenance\n"
+#~ "Folders\n"
+#~ "Customized"
+#~ msgstr ""
+#~ "Mantenimento\n"
+#~ "Bouquet\n"
+#~ "Personalizzati"
+
+#~ msgid ""
+#~ "Vhannibal AutoSetting %s is available\n"
+#~ "The update is mandatory, do you want to proceed?\n"
+#~ "Enigma will restart"
+#~ msgstr ""
+#~ "Vhannibal AutoSetting %s e' disponibile\n"
+#~ "L'aggiornamento e' obbligatorio, vuoi procedere?\n"
+#~ "Enigma si riavviera'"
+
+#~ msgid ""
+#~ "New version %s downloaded successfully\n"
+#~ "Enigma will now be restarted..."
+#~ msgstr ""
+#~ "La nuova versione %s e' stata scaricata\n"
+#~ "Riavviando Enigma 2..."
+
+#~ msgid ""
+#~ "To update your settings, you have to install Vhannibal AutoSetting %s\n"
+#~ "The update is mandatory, do you want to proceed?\n"
+#~ "Enigma will restart"
+#~ msgstr ""
+#~ "Per aggiornare i setting e' necessario installare Vhannibal AutoSetting %s\n"
+#~ "L'aggiornamento e' obbligatorio, vuoi procedere?\n"
+#~ "Enigma si riavviera'"

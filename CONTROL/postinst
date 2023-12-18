@@ -1,0 +1,25 @@
+#!/bin/sh
+# echo
+# NomePlugin="NGsetting"
+# if [ -f /usr/lib/enigma2/python/Plugins/Plugin.pyo ] && [ -f /usr/lib/enigma2/python/Plugins/Extensions/$NomePlugin/plugin.pyc ]; then
+    # echo
+    # echo "Renaming python modules ... from .pyc to .pyo"
+    # for file in /usr/lib/enigma2/python/Plugins/Extensions/$NomePlugin/*.pyc; do
+         # mv $file ${file%.pyc}.pyo
+    # done
+    # for file in /usr/lib/enigma2/python/Plugins/Extensions/$NomePlugin/Moduli/*.pyc; do
+         # mv $file ${file%.pyc}.pyo
+    # done
+    
+# elif [ -f /usr/lib/enigma2/python/Plugins/Plugin.pyc ] && [ -f /usr/lib/enigma2/python/Plugins/Extensions/$NomePlugin/plugin.pyo ]; then
+    # echo
+    # echo "Renaming python modules ... from .pyo to .pyc"
+    # for file in /usr/lib/enigma2/python/Plugins/Extensions/$NomePlugin/*.pyo; do
+         # mv $file ${file%.pyo}.pyc
+    # done
+    # for file in /usr/lib/enigma2/python/Plugins/Extensions/$NomePlugin/Moduli/*.pyo; do
+         # mv $file ${file%.pyo}.pyc
+    # done
+# fi
+
+exit 0
