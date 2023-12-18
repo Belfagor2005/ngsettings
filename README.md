@@ -3,6 +3,9 @@ Vhannibal Enigma2 Plugin Settings Manager
 ![](https://komarev.com/ghpvc/?username=Belfagor2005)
 
 
+<img src="https://github.com/Belfagor2005/ngsettings/blob/main/screen/screenshot1.jpg?raw=true">
+<img src="https://github.com/Belfagor2005/ngsettings/blob/main/screen/screenshot2.jpg?raw=true">
+<img src="https://github.com/Belfagor2005/ngsettings/blob/main/screen/screenshot3.jpg?raw=true">
 
 v.2.5 last finish end .. stop
 -add wqhd skin 2560
