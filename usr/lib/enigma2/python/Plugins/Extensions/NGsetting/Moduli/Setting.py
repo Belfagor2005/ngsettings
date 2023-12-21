@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import re
 import glob
-import shutil
 import os
+import re
+import shutil
 import sys
 import time
 
@@ -34,7 +34,9 @@ SelBack = DirFolder + '/Moduli/NGsetting/SelectBack'
 SSelect = DirFolder + '/Moduli/NGsetting/Select'
 # 'DVB-T': ('eeee0000', 't', 61166), 'DVB-T2': ('eeee0000', 't', 61166),
 DIGTV = 'eeee0000'
-keepdtt = False  # is True, save all bouquet dtt
+# keepdtt is True, save all bouquet dtt
+keepdtt = False
+
 
 def TimerControl():
     now = time.localtime(time.time())
@@ -49,14 +51,13 @@ def StartSavingTerrestrialChannels():
         for file in sorted(glob.glob("/etc/enigma2/*.tv")):
             f = open(file, "r").read()
             x = f.strip().lower()
-            if x.find(DIGTV[:4]) != -1:
-                return file
-                break
-            # if x.find('eeee0000') != -1:
-                # if x.find('82000') == -1 or x.find('c0000') == -1:
-                    # return file
-                    # break
-        return
+            # if x.find(DIGTV[:4]) != -1:
+                # return file
+                # break
+            if x.find('eeee') != -1:
+                # if x.find('82000') == -1 and x.find('c0000') == -1:
+                    return file
+                    break
 
     def ResearchBouquetTerrestrial(search):
         for file in sorted(glob.glob("/etc/enigma2/*.tv")):
@@ -65,19 +66,21 @@ def StartSavingTerrestrialChannels():
             x1 = f.strip()
             if x1.find("#NAME") != -1:
                 if x.lower().find(search.lower()) != -1:
-                    if x.find(DIGTV[:4]) != -1:
+                    # if x.find(DIGTV[:4]) != -1:
+                        # return file
+                        # break
+                    if x.find('eeee') != -1:
                         return file
                         break
-        return
 
     def SaveTrasponderService():
-        TrasponderListOldLamedb = open(DirFolder + TransOldLamedb, 'w')
-        ServiceListOldLamedb = open(DirFolder + ServOldLamedb, 'w')
+        TrasponderListOldLamedb = open(DirFolder + '/NGsetting/Temp/TrasponderListOldLamedb', 'w')
+        ServiceListOldLamedb = open(DirFolder + '/NGsetting/Temp/ServiceListOldLamedb', 'w')
         Trasponder = False
         inTransponder = False
         inService = False
         try:
-            LamedbFile = open(ee2ldb, 'r')
+            LamedbFile = open('/etc/enigma2/lamedb', 'r')
             while 1:
                 line = LamedbFile.readline()
                 if not line:
@@ -91,7 +94,8 @@ def StartSavingTerrestrialChannels():
                     inTransponder = False
                     inService = False
                 line = line.lower()
-                if line.find(DIGTV[:4]) != -1:
+                # if line.find(DIGTV[:4]) != -1:
+                if line.find('eeee') != -1:
                     Trasponder = True
                     if inTransponder:
                         TrasponderListOldLamedb.write(line)
@@ -109,18 +113,19 @@ def StartSavingTerrestrialChannels():
             TrasponderListOldLamedb.close()
             ServiceListOldLamedb.close()
             if not Trasponder:
-                os.system('rm -fr ' + DirFolder + TransOldLamedb)
-                os.system('rm -fr ' + DirFolder + ServOldLamedb)
+                os.system('rm -fr ' + DirFolder + '/NGsetting/Temp/TrasponderListOldLamedb')
+                os.system('rm -fr ' + DirFolder + '/NGsetting/Temp/ServiceListOldLamedb')
         except:
             pass
         return Trasponder
 
     def CreateBouquetForce():
-        WritingBouquetTemporary = open(DirFolder + TerChArch, 'w')
+        WritingBouquetTemporary = open(DirFolder + '/NGsetting/Temp/TerrestrialChannelListArchive', 'w')
         WritingBouquetTemporary.write('#NAME terrestre\n')
-        ReadingTempServicelist = open(DirFolder + ServOldLamedb, 'r').readlines()
+        ReadingTempServicelist = open(DirFolder + '/NGsetting/Temp/ServiceListOldLamedb', 'r').readlines()
         for jx in ReadingTempServicelist:
-            if jx.find(DIGTV[:4]) != -1:
+            # if jx.find(DIGTV[:4]) != -1:
+            if jx.find('eeee') != -1:
                 String = jx.split(':')
                 WritingBouquetTemporary.write('#SERVICE 1:0:%s:%s:%s:%s:%s:0:0:0:\n' % (hex(int(String[4]))[2:], String[0], String[2], String[3], String[1]))
         WritingBouquetTemporary.close()
@@ -130,17 +135,17 @@ def StartSavingTerrestrialChannels():
         if not NameDirectory:
             NameDirectory = ForceSearchBouquetTerrestrial()
         try:
-            shutil.copyfile(NameDirectory, DirFolder + TerChArch)
+            shutil.copyfile(NameDirectory, DirFolder + '/NGsetting/Temp/TerrestrialChannelListArchive')
             return True
         except:
             pass
-        return
+
     Service = SaveTrasponderService()
     if Service:
         if not SaveBouquetTerrestrial():
             CreateBouquetForce()
         return True
-    return
+
 
 def TransferBouquetTerrestrialFinal():
 
@@ -151,10 +156,9 @@ def TransferBouquetTerrestrialFinal():
                 x = f.read()
                 if re.search('#NAME Digitale Terrestre', x, flags=re.IGNORECASE) or re.search('#NAME DTT', x, flags=re.IGNORECASE):  # for disa51
                     return "/etc/enigma2/" + file
-        return
 
     try:
-        TerrestrialChannelListArchive = open(DirFolder + TerChArch, 'r').readlines()
+        TerrestrialChannelListArchive = open(DirFolder + '/NGsetting/Temp/TerrestrialChannelListArchive').readlines()
         DirectoryUserBouquetTerrestrial = RestoreTerrestrial()
         if DirectoryUserBouquetTerrestrial:
             TrasfBouq = open(DirectoryUserBouquetTerrestrial, 'w')
@@ -167,7 +171,6 @@ def TransferBouquetTerrestrialFinal():
             return True
     except:
         return False
-    return
 
 
 def SearchDTT():
@@ -191,7 +194,6 @@ def SearchIPTV():
         usbq_lines = usbq.strip().lower()
         if "http" in usbq_lines:
             iptv_list.append(os.path.basename(iptv_file))
-
     if not iptv_list:
         return False
     else:
@@ -206,7 +208,7 @@ def StartProcess(link, type, Personal):
             ServiceListNewLamedb = open(DirFolder + '/NGsetting/Temp/ServiceListNewLamedb', 'w')
             inTransponder = False
             inService = False
-            infile = open(ee2ldb, 'r')
+            infile = open('/etc/enigma2/lamedb', 'r')
             while 1:
                 line = infile.readline()
                 if not line:
@@ -225,13 +227,13 @@ def StartProcess(link, type, Personal):
                     ServiceListNewLamedb.write(line)
             TrasponderListNewLamedb.close()
             ServiceListNewLamedb.close()
-            WritingLamedbFinal = open(ee2ldb, "w")
+            WritingLamedbFinal = open('/etc/enigma2/lamedb', 'w')
             WritingLamedbFinal.write("eDVB services /4/\n")
             TrasponderListNewLamedb = open(DirFolder + '/NGsetting/Temp/TrasponderListNewLamedb', 'r').readlines()
             for x in TrasponderListNewLamedb:
                 WritingLamedbFinal.write(x)
             try:
-                TrasponderListOldLamedb = open(DirFolder + TransOldLamedb, 'r').readlines()
+                TrasponderListOldLamedb = open(DirFolder + '/NGsetting/Temp/TrasponderListOldLamedb', 'r').readlines()
                 for x in TrasponderListOldLamedb:
                     WritingLamedbFinal.write(x)
             except:
@@ -241,7 +243,7 @@ def StartProcess(link, type, Personal):
             for x in ServiceListNewLamedb:
                 WritingLamedbFinal.write(x)
             try:
-                ServiceListOldLamedb = open(DirFolder + ServOldLamedb, 'r').readlines()
+                ServiceListOldLamedb = open(DirFolder + '/NGsetting/Temp/ServiceListOldLamedb', 'r').readlines()
                 for x in ServiceListOldLamedb:
                     WritingLamedbFinal.write(x)
             except:
@@ -270,10 +272,10 @@ def StartProcess(link, type, Personal):
                 req = Request(link)
                 req.add_header('User-Agent', "VAS14")
                 response = urlopen(req)
-                link = response.read()
+                rlink = response.read()
                 response.close()
                 Setting = open(foldsettmp, 'w')
-                Setting.write(link)
+                Setting.write(rlink)
                 Setting.close()
             if os.path.exists(foldsettmp):
                 try:
@@ -304,15 +306,16 @@ def StartProcess(link, type, Personal):
             return
 
     def SaveList(list):
-        jw = open(SelBack, 'w')
+        jw = open('/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/SelectBack', 'w')
         for dir, name in list:
             jw.write(dir + '---' + name + '\n')
         jw.close()
 
     def SavePersonalSetting():
         try:
-            os.system('mkdir ' + DirFolder + '/NGsetting/SelectFolder')
-            jw = open(SSelect, 'r')
+            if not os.path.exists('/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/SelectFolder'):
+                os.system('mkdir /usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/SelectFolder')
+            jw = open('/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/Select')
             jjw = jw.readlines()
             jw.close()
             count = 1
@@ -333,7 +336,7 @@ def StartProcess(link, type, Personal):
 
     def TransferPersonalSetting():
         try:
-            jw = open(SelBack, 'r')
+            jw = open('/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/SelectBack')
             jjw = jw.readlines()
             jw.close()
             for x in jjw:
@@ -348,7 +351,7 @@ def StartProcess(link, type, Personal):
 
     def CreateUserbouquetPersonalSetting():
         try:
-            jw = open(SelBack, 'r')
+            jw = open('/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/SelectBack', 'r')
             jjw = jw.readlines()
             jw.close()
         except:
@@ -387,9 +390,9 @@ def StartProcess(link, type, Personal):
 
     def TransferNewSetting():
         try:
-            KeepIPTV()
             if keepdtt is True:
                 KeepDTT()
+            KeepIPTV()
             os.system("rm -rf /etc/enigma2/lamedb")
             os.system("rm -rf /etc/enigma2/*.radio")
             os.system("rm -rf /etc/enigma2/*.tv")
@@ -422,7 +425,7 @@ def StartProcess(link, type, Personal):
                 if TransferPersonalSetting():
                     CreateUserbouquetPersonalSetting()
                     os.system('rm -rf ' + DirFolder + '/NGsetting/SelectFolder')
-                    os.system('mv ' + SelBack + ' ' + SSelect)
+                    os.system('mv /usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/SelectBack /usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Moduli/NGsetting/Select')
             os.system('rm -rf ' + DirFolder + '/NGsetting/enigma2')
         else:
             os.system('cp -rf ' + DirFolder + '/NGsetting/enigma2/* /etc/enigma2')
@@ -432,5 +435,5 @@ def StartProcess(link, type, Personal):
             if SavingProcessTerrestrialChannels:
                 if LamedbRestore():
                     TransferBouquetTerrestrialFinal()
-    os.system('rm -rf ' + DirFolder + '/NGsetting/Temp/*')  # Delete all files and run a rescue reload
+    # os.system('rm -rf ' + DirFolder + '/NGsetting/Temp/*')  # Delete all files and run a rescue reload
     return Status

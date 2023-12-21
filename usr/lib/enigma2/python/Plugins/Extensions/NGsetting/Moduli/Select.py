@@ -19,7 +19,7 @@ import codecs
 import glob
 import os
 from .Config import ConverDate, Load
-from .. import _
+from .Language import _
 plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/NGsetting'
 SSelect = plugin_path + '/Moduli/NGsetting/Select'
 HD = getDesktop(0).size()
@@ -45,7 +45,7 @@ class MenuListSelect(MenuList):
             self.l.setItemHeight(45)
 
 
-class ListSelect():
+class ListSelect:
     def __init__(self):
         pass
 

@@ -478,7 +478,7 @@ class NgSetting():
                 return False
             return
 
-        if OnDsl:
+        if OnDsl():
             for self.date, self.name, self.link in DownloadSetting():
                 if self.name == NameSat:
                     if self.date > Data or Auto:
@@ -501,7 +501,7 @@ class NgSetting():
             self.session.open(MessageBox, _("Sorry!\nError Download Setting"), MessageBox.TYPE_ERROR, timeout=5)
 
 
-global jsession
+# global jsession
 jsession = None
 iTimerClass = NgSetting(jsession)
 
