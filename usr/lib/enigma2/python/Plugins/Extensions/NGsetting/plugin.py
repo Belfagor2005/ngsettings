@@ -34,7 +34,7 @@ if sys.version_info[0] >= 3:
     PY3 = True
 
 
-Version = '2.5'
+Version = '2.6'
 MinStart = int(choice(range(59)))
 plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/NGsetting'
 Ddate = plugin_path + '/Moduli/NGsetting/Date'
@@ -194,7 +194,7 @@ class MenuiSettingE2(Screen):
 
     def exitplug(self):
         if self.DubleClick:
-            self.ExitPlugin.start(10000, True)
+            self.ExitPlugin.start(8000, True)
             self.DubleClick = False
             self.MenuB()
         else:
@@ -312,9 +312,9 @@ class MenuiSettingE2(Screen):
         self.jB = []
         if not self.DubleClick:
             self.ServerOn = False
-            self.jB.append(self.hauptListEntryMenuB('', '', '', '', ''))
+            self.jB.append(self.hauptListEntryMenuB(_('NGsetting Version ') + Version, '', '', '', ''))
             self.jB.append(self.hauptListEntryMenuB(_('Coder: m43c0 & ftp21'), '', '', '', ''))
-            self.jB.append(self.hauptListEntryMenuB(_('Edit by: Lululla'), '', '', '', ''))
+            self.jB.append(self.hauptListEntryMenuB(_('Edit by: @Lululla 20231201'), '', '', '', ''))
             self.jB.append(self.hauptListEntryMenuB(_('Skinner: mmark'), '', '', '', ''))
             self.jB.append(self.hauptListEntryMenuB(_('Vhannibal Official Plugin'), '', '', '', ''))
             self.jB.append(self.hauptListEntryMenuB(_('www.vhannibal.net'), '', '', '', ''))
@@ -526,6 +526,6 @@ def Main(session, **kwargs):
 
 def Plugins(**kwargs):
     ico_path = 'Vhannibal.png'
-    return [PluginDescriptor(name='Vhannibal AutoSetting ' + Version, description='Vhannibal Official Plugin by NGSetting', icon=ico_path, where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=Main),
+    return [PluginDescriptor(name='Vhannibal AutoSetting' + Version, description='Vhannibal Official Plugin by NGSetting', icon=ico_path, where=[PluginDescriptor.WHERE_EXTENSIONSMENU, PluginDescriptor.WHERE_PLUGINMENU], fnc=Main),
             PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=SessionStart),
             PluginDescriptor(where=PluginDescriptor.WHERE_AUTOSTART, fnc=AutoStart)]

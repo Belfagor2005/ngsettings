@@ -1,9 +1,9 @@
 Package: enigma2-plugin-extensions-ngsetting-fhd
-Version: 2.5
+Version: 2.6
 Section: extra
 Priority: optional
 Architecture: all
-Maintainer: m43c0,ftp21, mmark, lululla
+Maintainer: m43c0, ftp21, mmark, lululla
 Description: NGsetting
 Source: <m43c0@live.it>
 Homepage: http://www.dream-elite.net
