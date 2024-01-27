@@ -1,4 +1,4 @@
-<screen name="NGsettingE2" position="center,center" size="900,550" title="Main Menu" backgroundColor="#ff000000" flags="wfNoBorder">
+<screen name="MenuiSettingE2" position="center,center" size="900,550" title="Main Menu" backgroundColor="#ff000000" flags="wfNoBorder">
 	<eLabel position="10,0" size="884,45" backgroundColor="#10101010" zPosition="0" />
 	<eLabel position="10,0" size="1,45" backgroundColor="#20202020" zPosition="0" />
 	<eLabel position="10,0" size="865,1" backgroundColor="#20202020" zPosition="0" />

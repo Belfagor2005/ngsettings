@@ -1,4 +1,4 @@
-<screen name="NGsettingE2" title="Main Menu" position="center,center" size="1920,1080" backgroundColor="#ff000000" flags="wfNoBorder">
+<screen name="MenuiSettingE2" title="Main Menu" position="center,center" size="1920,1080" backgroundColor="#ff000000" flags="wfNoBorder">
 	<!-- Header -->
     <ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/background.jpg" position="0,0" size="1920,1080" scale="stretch" zPosition="-2" />
 	<ePixmap position="30,103" size="1840,2" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/NGsetting/Skin/fhd/sep2.png" zPosition="3" />

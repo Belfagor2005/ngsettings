@@ -1,22 +1,20 @@
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryPixmapAlphaTest
 from Components.MultiContent import MultiContentEntryText
 from Components.Pixmap import Pixmap
 from Screens.Screen import Screen
-from enigma import RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from enigma import RT_VALIGN_CENTER
 from enigma import RT_HALIGN_LEFT
 from enigma import eListboxPythonMultiContent
 from enigma import gFont
 from enigma import getDesktop
 from enigma import loadPNG
 import codecs
-import glob
 import os
 from .Config import ConverDate, Load
 from .Language import _
@@ -50,8 +48,8 @@ class ListSelect:
         pass
 
     def readSaveList(self):
-        try:
-            jw = open(SSelect)
+        with codecs.open(SSelect, "r", encoding="utf-8") as jw:
+            # jw = open(SSelect)
             jjw = jw.readlines()
             jw.close()
             list = []
@@ -62,16 +60,14 @@ class ListSelect:
                 except:
                     pass
             return list
-        except:
-            pass
 
     def SaveList(self, list):
-        jw = open(SSelect, 'w')
-        for dir, name, value in list:
-            if value == '1':
-                jw.write(dir + '---' + name + '\n')
-        jw.close()
-
+        with codecs.open(SSelect, "w", encoding="utf-8") as jw:
+        # jw = open(SSelect, 'w')
+            for dir, name, value in list:
+                if value == '1':
+                    jw.write(dir + '---' + name + '\n')
+            jw.close()
 
     def readBouquetsList(self, pwd, bouquetname):
         try:
@@ -91,7 +87,6 @@ class ListSelect:
             filename = None
             if line[:12] == "FROM BOUQUET":
                 tmp = line[13:].split(" ")
-                # filename = tmp[0].strip("\"")
                 filename = tmp[0].strip('"')
             else:
                 filename = line
@@ -128,6 +123,7 @@ class ListSelect:
 
 
 class MenuSelect(Screen):
+
     def __init__(self, session):
         self.session = session
         skin = os.path.join(skin_path, 'Main.xml')
@@ -170,15 +166,15 @@ class MenuSelect(Screen):
                                                            "cancel": self.Uscita,
                                                            "nextBouquet": self["B"].pageUp,
                                                            "prevBouquet": self["B"].pageDown,
-                                                           "red": self.Uscita
+                                                           "red": self.Uscita,
                                                            }, -1)
 
     def Info(self):
         AutoTimer, NameSat, Data, Type, Personal, DowDate = Load()
         if str(Data) == '0':
-            newdate = ('')
+            newdate = ''
         else:
-            newdate = (' - ' + ConverDate(Data))
+            newdate = ' - ' + ConverDate(Data)
         if str(DowDate) == '0':
             newDowDate = _('Last Update: Unregistered')
         else:
@@ -207,14 +203,18 @@ class MenuSelect(Screen):
         if HD.width() == 2560:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 20), size=(20, 20), png=loadPNG(icon)))
             res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))            
         elif HD.width() == 1920:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 15), size=(20, 20), png=loadPNG(icon)))
             res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))            
         else:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 11), size=(20, 20), png=loadPNG(icon)))
             res.append(MultiContentEntryText(pos=(50, 0), size=(500, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
-        res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
-        res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))
         return res
 
     def hauptListEntryA(self, name):
@@ -248,9 +248,8 @@ class MenuSelect(Screen):
     def Menu(self):
         self.jA = []
         for dir, name, value in self.ListSelect.TvList():
-            # if name != 'Digitale Terrestre' and name != 'Favourites (TV)' and name[2:] != 'Vhannibal Settings':
-            # if name != 'Favourites (TV)' and name[2:] != 'Vhannibal Settings':
-            self.jA.append(self.hauptListEntry(dir, name, value))
+            if name != 'Digitale Terrestre' and name != 'Favourites (TV)' and name[2:] != 'Vhannibal Settings':
+                self.jA.append(self.hauptListEntry(dir, name, value))
         self["B"].setList(self.jA)
 
     def OkSelect(self):

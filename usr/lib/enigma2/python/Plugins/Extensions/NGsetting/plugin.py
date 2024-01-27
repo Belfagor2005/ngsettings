@@ -34,7 +34,7 @@ if sys.version_info[0] >= 3:
     PY3 = True
 
 
-Version = '2.6'
+Version = '2.7'
 MinStart = int(choice(range(59)))
 plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/NGsetting'
 Ddate = plugin_path + '/Moduli/NGsetting/Date'
@@ -95,7 +95,7 @@ class MenuListiSettingE2A(MenuList):
             self.l.setItemHeight(45)
 
 
-class MenuiSettingE2(Screen):
+class MenuSetting(Screen):
 
     def __init__(self, session):
         self.session = session
@@ -521,7 +521,7 @@ def AutoStart(reason, **kwargs):
 
 
 def Main(session, **kwargs):
-    session.open(MenuiSettingE2)
+    session.open(MenuSetting)
 
 
 def Plugins(**kwargs):
