@@ -48,8 +48,8 @@ class ListSelect:
         pass
 
     def readSaveList(self):
-        with codecs.open(SSelect, "r", encoding="utf-8") as jw:
-            # jw = open(SSelect)
+        # with codecs.open(Select, "r", encoding="utf-8") as jw:
+            jw = open(SSelect)
             jjw = jw.readlines()
             jw.close()
             list = []
@@ -62,8 +62,8 @@ class ListSelect:
             return list
 
     def SaveList(self, list):
-        with codecs.open(SSelect, "w", encoding="utf-8") as jw:
-        # jw = open(SSelect, 'w')
+        # with codecs.open(SSelect, "w", encoding="utf-8") as jw:
+            jw = open(SSelect, 'w')
             for dir, name, value in list:
                 if value == '1':
                     jw.write(dir + '---' + name + '\n')
@@ -94,6 +94,7 @@ class ListSelect:
                 try:
                     fb = open(pwd + "/" + filename)
                 except Exception as e:
+                    print(e)
                     continue
                 tmp = fb.readline().strip()
                 if tmp[:6] == "#NAME ":
@@ -160,14 +161,14 @@ class MenuSelect(Screen):
                                      "MenuActions",
                                      "HelpActions",
                                      "EPGSelectActions"], {
-                                                           "ok": self.OkSelect,
-                                                           "up": self.keyUp,
-                                                           "down": self.keyDown,
-                                                           "cancel": self.Uscita,
-                                                           "nextBouquet": self["B"].pageUp,
-                                                           "prevBouquet": self["B"].pageDown,
-                                                           "red": self.Uscita,
-                                                           }, -1)
+            "ok": self.OkSelect,
+            "up": self.keyUp,
+            "down": self.keyDown,
+            "cancel": self.Uscita,
+            "nextBouquet": self["B"].pageUp,
+            "prevBouquet": self["B"].pageDown,
+            "red": self.Uscita,
+        },   -1)
 
     def Info(self):
         AutoTimer, NameSat, Data, Type, Personal, DowDate = Load()
@@ -202,17 +203,17 @@ class MenuSelect(Screen):
             pass
         if HD.width() == 2560:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 20), size=(20, 20), png=loadPNG(icon)))
-            res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
-            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))            
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))
         elif HD.width() == 1920:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 15), size=(20, 20), png=loadPNG(icon)))
-            res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
-            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))            
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))
         else:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 11), size=(20, 20), png=loadPNG(icon)))
-            res.append(MultiContentEntryText(pos=(50, 0), size=(500, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(50, 0), size=(500, 40), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
             res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))
         return res
@@ -224,11 +225,11 @@ class MenuSelect(Screen):
         except:
             pass
         if HD.width() == 2560:  # 1770
-            res.append(MultiContentEntryText(pos=(10, 0), size=(850, 56), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(10, 0), size=(850, 56), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
         elif HD.width() == 1920:
-            res.append(MultiContentEntryText(pos=(10, 0), size=(500, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(10, 0), size=(500, 40), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
         else:
-            res.append(MultiContentEntryText(pos=(10, 0), size=(170, 40), font=0, text=name, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER))
+            res.append(MultiContentEntryText(pos=(10, 0), size=(170, 40), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
         return res
 
     def MenuA(self):
