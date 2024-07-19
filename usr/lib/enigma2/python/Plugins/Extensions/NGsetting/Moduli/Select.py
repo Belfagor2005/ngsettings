@@ -1,23 +1,27 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from Components.ActionMap import ActionMap
-from Components.Label import Label
-from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryPixmapAlphaTest
-from Components.MultiContent import MultiContentEntryText
-from Components.Pixmap import Pixmap
-from Screens.Screen import Screen
-from enigma import RT_VALIGN_CENTER
-from enigma import RT_HALIGN_LEFT
-from enigma import eListboxPythonMultiContent
-from enigma import gFont
-from enigma import getDesktop
-from enigma import loadPNG
-import codecs
-import os
+from __future__ import print_function
 from .Config import ConverDate, Load
 from .Language import _
+from Components.ActionMap import ActionMap
+from Components.ConfigList import ConfigListScreen
+from Components.Label import Label
+from Components.MenuList import MenuList
+from Components.MultiContent import (MultiContentEntryPixmapAlphaTest, MultiContentEntryText)
+from Components.Pixmap import Pixmap
+from Screens.Screen import Screen
+from enigma import (
+    RT_HALIGN_LEFT,
+    RT_VALIGN_CENTER,
+    eListboxPythonMultiContent,
+    gFont,
+    getDesktop,
+    loadPNG,
+)
+import codecs
+import os
+
 plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/NGsetting'
 SSelect = plugin_path + '/Moduli/NGsetting/Select'
 HD = getDesktop(0).size()
@@ -48,8 +52,7 @@ class ListSelect:
         pass
 
     def readSaveList(self):
-        # with codecs.open(Select, "r", encoding="utf-8") as jw:
-            jw = open(SSelect)
+        with codecs.open(SSelect, "r", encoding="utf-8") as jw:
             jjw = jw.readlines()
             jw.close()
             list = []
@@ -62,8 +65,7 @@ class ListSelect:
             return list
 
     def SaveList(self, list):
-        # with codecs.open(SSelect, "w", encoding="utf-8") as jw:
-            jw = open(SSelect, 'w')
+        with codecs.open(SSelect, "w", encoding="utf-8") as jw:
             for dir, name, value in list:
                 if value == '1':
                     jw.write(dir + '---' + name + '\n')
@@ -94,7 +96,7 @@ class ListSelect:
                 try:
                     fb = open(pwd + "/" + filename)
                 except Exception as e:
-                    print(e)
+                    print('err', e)
                     continue
                 tmp = fb.readline().strip()
                 if tmp[:6] == "#NAME ":
@@ -160,15 +162,13 @@ class MenuSelect(Screen):
                                      "NumberActions",
                                      "MenuActions",
                                      "HelpActions",
-                                     "EPGSelectActions"], {
-            "ok": self.OkSelect,
-            "up": self.keyUp,
-            "down": self.keyDown,
-            "cancel": self.Uscita,
-            "nextBouquet": self["B"].pageUp,
-            "prevBouquet": self["B"].pageDown,
-            "red": self.Uscita,
-        },   -1)
+                                     "EPGSelectActions"], {"ok": self.OkSelect,
+                                                           "up": self.keyUp,
+                                                           "down": self.keyDown,
+                                                           "cancel": self.Uscita,
+                                                           "nextBouquet": self["B"].pageUp,
+                                                           "prevBouquet": self["B"].pageDown,
+                                                           "red": self.Uscita}, -1)
 
     def Info(self):
         AutoTimer, NameSat, Data, Type, Personal, DowDate = Load()
@@ -205,7 +205,7 @@ class MenuSelect(Screen):
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 20), size=(20, 20), png=loadPNG(icon)))
             res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))
             res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=dir, flags=RT_HALIGN_LEFT))
-            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))
+            res.append(MultiContentEntryText(pos=(0, 0), size=(0, 0), font=0, text=value, flags=RT_HALIGN_LEFT))            
         elif HD.width() == 1920:
             res.append(MultiContentEntryPixmapAlphaTest(pos=(10, 15), size=(20, 20), png=loadPNG(icon)))
             res.append(MultiContentEntryText(pos=(50, 0), size=(1000, 40), font=0, text=name, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER))

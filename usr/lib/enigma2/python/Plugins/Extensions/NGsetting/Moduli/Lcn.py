@@ -102,6 +102,7 @@ class LCN:
                 value = x[0]
                 cmd = "x[0] = " + rule
                 try:
+                    print('value:', value)
                     exec(cmd)
                 except Exception as e:
                     print(e)

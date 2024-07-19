@@ -1,34 +1,42 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+from __future__ import print_function
+from .Moduli.Language import _
+from .Moduli.Lcn import LCN
+from .Moduli.Select import MenuSelectV
+from .Moduli.Config import (
+    ConverDate_noyear,
+    WriteSave,
+    Load,
+    DownloadSetting,
+)
+from .Moduli.Setting import StartProcess
 from Components.ActionMap import ActionMap
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Components.MultiContent import MultiContentEntryPixmapAlphaTest
-from Components.MultiContent import MultiContentEntryText
+from Components.MultiContent import (MultiContentEntryPixmapAlphaTest, MultiContentEntryText)
 from Components.Pixmap import Pixmap
 from Plugins.Plugin import PluginDescriptor
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from enigma import RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
-from enigma import eListboxPythonMultiContent
-from enigma import eTimer
-from enigma import gFont
-from enigma import getDesktop
+from enigma import (
+    RT_HALIGN_LEFT,
+    RT_HALIGN_CENTER,
+    RT_VALIGN_CENTER,
+    eListboxPythonMultiContent,
+    eTimer,
+    gFont,
+    getDesktop,
+)
 from random import choice
 import codecs
 import os
 import socket
 import sys
 import time
-# from . import _
-from .Moduli.Setting import StartProcess
-from .Moduli.Config import ConverDate_noyear, WriteSave
-from .Moduli.Config import Load, DownloadSetting
-from .Moduli.Language import _
-from .Moduli.Lcn import LCN
-from .Moduli.Select import MenuSelect
+
 PY3 = False
 if sys.version_info[0] >= 3:
     PY3 = True
@@ -40,12 +48,12 @@ plugin_path = '/usr/lib/enigma2/python/Plugins/Extensions/NGsetting'
 Ddate = plugin_path + '/Moduli/NGsetting/Date'
 SSelect = plugin_path + '/Moduli/NGsetting/Select'
 HD = getDesktop(0).size()
-skin_path = os.path.join(plugin_path, "Skin/hd/")
 if HD.width() == 1920:
     skin_path = plugin_path + '/Skin/fhd/'
-if HD.width() == 2560:
+elif HD.width() == 2560:
     skin_path = plugin_path + '/Skin/uhd/'
-
+else:
+    skin_path = os.path.join(plugin_path, "Skin/hd/")  
 
 def ReloadBouquets():
     print('\n----Reloading bouquets----\n')
@@ -96,7 +104,6 @@ class MenuListiSettingE2A(MenuList):
 
 
 class MenuSetting(Screen):
-
     def __init__(self, session):
         self.session = session
         skin = os.path.join(skin_path, 'Main.xml')
@@ -112,8 +119,8 @@ class MenuSetting(Screen):
                                      "NumberActions",
                                      "MenuActions",
                                      "HelpActions",
-                                     "EPGSelectActions"], {
-                                                           "ok": self.keyOK,
+                                     "EPGSelectActions"], {"ok": self.keyOK,
+                                                                            
                                                            "up": self.keyUp,
                                                            "down": self.keyDown,
                                                            "blue": self.Auto,
@@ -122,8 +129,7 @@ class MenuSetting(Screen):
                                                            "cancel": self.exitplug,
                                                            "left": self.keyRightLeft,
                                                            "right": self.keyRightLeft,
-                                                           "red": self.exitplug
-                                                           }, -1)
+                                                           "red": self.exitplug}, -1)
         self['autotimer'] = Label("")
         self['namesat'] = Label("")
         self['text'] = Label("")
@@ -144,8 +150,7 @@ class MenuSetting(Screen):
         self["Key_Green"] = Label(_("Setting Installed:"))
         self["Key_Personal"] = Label("")
         AutoTimer, NameSat, Data, Type, Personal, DowDate = Load()
-        self.List = []
-        self.List = DownloadSetting()
+        # self.List = []
         self['A'] = MenuListiSettingE2A([])
         self['B'] = MenuListiSettingE2([])
         self["B"].selectionEnabled(1)
@@ -154,6 +159,7 @@ class MenuSetting(Screen):
         self.ServerOn = True
         self.DubleClick = True
         self.MenuA()
+        self.List = DownloadSetting()
         self.MenuB()
         self.iTimer = eTimer()
         try:
@@ -183,7 +189,7 @@ class MenuSetting(Screen):
         self.onShown.append(self.Info)
 
     def changedEntry(self):
-            pass
+        pass
 
     def PluginClose(self):
         try:
@@ -194,7 +200,7 @@ class MenuSetting(Screen):
 
     def exitplug(self):
         if self.DubleClick:
-            self.ExitPlugin.start(8000, True)
+            self.ExitPlugin.start(30000, True)
             self.DubleClick = False
             self.MenuB()
         else:
